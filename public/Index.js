@@ -21,7 +21,7 @@ closeFormBtn.addEventListener("click", closeForm);
 let myLibrary = [];
 
 function Book(title, author, genre, pages, isRead) {
-  this.isRead = isRead ? "read" : "unread";
+  this.isRead = isRead ? "Book on reading" : "Book is available";
   this.title = title;
   this.author = author;
   this.genre = genre;
@@ -43,12 +43,14 @@ inputForm.addEventListener("submit", function (event) {
   addBookToLibrary(book);
 
   const contentHandler = function (content) {
-    return `<div class="bookCard align-baseline gap-4 flex flex-col justify-center m-3 border-4 w-1/6 p-8  min-h-40 border-green-600 rounded-2xl text-center">
-      <h1 class="bookTitle font-extrabold text-2xl">${content.title}</h1>
+    return `<div class="bookCard align-baseline gap-4 flex flex-col justify-center m-3 border-4 w-1/6 p-8  min-h-40 border-green-600 rounded-2xl text-center overflow-scroll">
+    <div class="border-b-2 border-green-400 pb-1">
+    <h1 class="bookTitle font-extrabold text-2xl">${content.title}</h1>
+    </div>
       <h2 class="author text-lg font-semibold">${content.author}</h2>
       <p class="pgNum text-base font-medium">${content.genre}</p>
       <p class="pgNum text-base font-medium">${content.pages}</p>
-      <p class="status">${content.isRead}</p>
+      <p class="status font-medium">${content.isRead}</p>
     </div>`;
   };
 
