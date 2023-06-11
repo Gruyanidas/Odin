@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="vanila.css" rel="stylesheet" />
+    <title>Library</title>
+  </head>
+  <body class="flex flex-col items-center py-4 relative">
+    <div class="container max-w-6xl gap-4 w-full max-h-screen flex flex-wrap border-4 border-yellow-700"></div>
+    <div class="my-4">
+      <button class="newBook flex flex-row items-center justify-center rounded-2xl text-xl font-semibold hover:opacity-70 hover:-translate-y-2 transition-all duration-500 w-full h-6 bg-amber-500 p-5">
+        Add new Book
+      </button>
+    </div>
+    <!-- INPUT NEW BOOK FORM -->
+    <div class="inputForm border-4 border-amber-500 rounded-3xl relative">
+      <form class="form my-4 flex min-h-[400px] w-full flex-col items-center justify-center gap-5 rounded-lg px-6 py-8">
+        <div class="bg-amber-400 rounded-full absolute right-0 top-0 h-[50px] w-[50px] hover:cursor-pointer hover:opacity-70" id="sign-up-close">
+          <img src="assets/cross.png" />
+        </div>
+        <div class="prose prose-stone text-center text-2xl font-semibold">
+          <h2>Import a new book to library</h2>
+        </div>
+        <div class="prose prose-stone flex flex-col items-start pb-2 font-semibold tracking-wider">
+          <label for="name" id="name-label" class="pb-2">Title</label>
+          <input required type="text" id="title" name="title" placeholder="Enter book title" class="mt-2 rounded-md px-4 py-2" />
+        </div>
+        <div class="prose prose-stone flex flex-col items-start pb-2 font-semibold tracking-wider">
+          <label for="name" id="name-label" class="pb-2">Author</label>
+          <input required type="text" id="author" name="author" placeholder="Enter book author" class="mt-2 rounded-md px-4 py-2" />
+        </div>
+        <div class="prose prose-stone flex flex-col items-start pb-2 font-semibold tracking-wider">
+          <label for="password" id="name-label" class="pb-2">Genre</label>
+          <input required type="text" id="genre" name="genre" placeholder="Enter book genre" class="mt-2 rounded-md px-4 py-2" />
+        </div>
+        <div class="prose prose-stone flex flex-col items-start font-semibold tracking-wider">
+          <label for="email" id="email-label" class="pb-2">Number of pages</label>
+          <input required name="pages" type="number" id="pages" placeholder="Total number of pages" class="mt-2 rounded-md px-4 py-2" />
+        </div>
+        <div class="prose prose-stone mt-0 flex flex-col items-center justify-center pt-0 font-semibold tracking-wider">
+          <label for="number" id="number-label">Read</label>
+          <input name="checkbox" type="checkbox" id="checkbox" class="mt-2 scale-150 rounded-lg p-8 px-4" />
+        </div>
+        <button id="signinbtn" type="submit" class="newBook flex flex-row items-center justify-center rounded-2xl text-xl font-semibold hover:opacity-70 hover:-translate-y-1 transition-all duration-500 w-full h-6 bg-amber-500 p-5">
+          SUBMIT
+        </button>
+      </form>
+    </div>
+    <script src="Index.js"></script>
+  </body>
+</html>
