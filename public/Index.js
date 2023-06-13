@@ -7,12 +7,12 @@ const closeFormBtn = document.getElementById("sign-up-close");
 
 const openForm = function () {
   inputForm.classList.remove("hidden");
-  newBookBtn.classList.add("hidden")
+  newBookBtn.classList.add("hidden");
 };
 
 const closeForm = function () {
   inputForm.classList.add("hidden");
-  newBookBtn.classList.remove("hidden")
+  newBookBtn.classList.remove("hidden");
 };
 
 newBookBtn.addEventListener("click", openForm);
@@ -42,6 +42,8 @@ inputForm.addEventListener("submit", function (event) {
 
   addBookToLibrary(book);
 
+  const [lybcontent] = myLibrary.slice(-1);
+
   const contentHandler = function (content) {
     return `<div class="bookCard align-baseline gap-4 flex flex-col justify-center m-3 border-4 w-1/6 p-8  min-h-40 border-green-600 rounded-2xl text-center overflow-scroll">
     <div class="border-b-2 border-green-400 pb-1">
@@ -51,14 +53,26 @@ inputForm.addEventListener("submit", function (event) {
       <p class="pgNum text-base font-medium">${content.genre}</p>
       <p class="pgNum text-base font-medium">${content.pages}</p>
       <p class="status font-medium">${content.isRead}</p>
+      <div>
+      <button id="remove" class="removeBook flex flex-row items-center justify-center rounded-lg text-sm font-semibold hover:opacity-70 transition-all duration-500 w-full h-6 bg-amber-500 px-4 py-6">Remove book</button>
+    </div>
     </div>`;
   };
 
-  const lybcontent = myLibrary.map((content) => contentHandler(content));
+  const htmlContent = contentHandler(lybcontent);
 
-  container.insertAdjacentHTML("afterbegin", lybcontent);
+  container.insertAdjacentHTML("afterbegin", htmlContent);
 
   // inputForm.reset();
+
+  const removeBookbtn = document.querySelector(".removeBook");
+  const bookCard = document.querySelector(".bookCard");
+
+  removeBookbtn.addEventListener("click", function (event) {
+    bookCard.classList.add("hidden");
+    console.log(event.target);
+  });
+  console.log(myLibrary);
 });
 
 // All of your book objects are going to be stored in a simple array, so add a function to the script (not the constructor) that can take user’s input and store the new book objects into an array.
