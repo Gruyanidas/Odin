@@ -43,12 +43,10 @@ inputForm.addEventListener("submit", function (event) {
 
   const book = new Book(title, author, genre, pages, isRead);
 
-  console.log(book.id);
   const addBookToLibrary = (book) => myLibrary.push(book);
 
   addBookToLibrary(book);
 
-  console.log(myLibrary);
   const [lybcontent] = myLibrary.slice(-1);
 
   const contentHandler = function (content) {
@@ -60,6 +58,10 @@ inputForm.addEventListener("submit", function (event) {
       <p class="pgNum text-base font-medium">${content.genre}</p>
       <p class="pgNum text-base font-medium">${content.pages}</p>
       <p class="status font-medium">${content.isRead}</p>
+      <div class="prose prose-stone mt-0 flex flex-col items-center justify-center pt-0 font-semibold tracking-wider">
+      <label for="number" id="number-label"></label>
+      <input name="checkbox" type="checkbox" id="checkbox" class="mt-2 scale-150 rounded-lg p-8 px-4" />
+    </div>
       <div>
       <button id=${content.id} class="removeBook flex flex-row items-center justify-center rounded-lg text-sm font-semibold hover:opacity-70 transition-all duration-500 w-full h-6 bg-amber-500 px-4 py-6">Remove book</button>
     </div>
@@ -70,40 +72,32 @@ inputForm.addEventListener("submit", function (event) {
 
   container.insertAdjacentHTML("afterbegin", htmlContent);
 
-  inputForm.reset();
+  // inputForm.reset();
 
   const removeBookbtn = document.querySelector(".removeBook");
   const bookCard = document.querySelector(".bookCard");
 
-  // removeBookbtn.addEventListener("click", function (event) {
-  //   myLibrary
-  //     .map((book) => {
-  //       book.id})
-  //   // bookCard.classList.add("hidden");
-  //   console.log(myLibrary);
-  // });
-  // const bookItem = myLibrary.find(event.target.id)
-  // console.log(bookItem);
-  // // const bookIndex = myLibrary.find((book) => book.id === event.target.id);
-  // // const deletedBook = myLibrary.splice(bookIndex, 1)[0];
-  // // alert(`Book ${deletedBook.title} has been deleted!`);
+  removeBookbtn.addEventListener("click", function (event) {
+    const clickedbuttonId = event.target.id;
+    const clickedItem = myLibrary.find(function(item) {
+      return item.id === clickedbuttonId});
+    myLibrary.splice(clickedItem,1);
+    console.log(myLibrary);
+      bookCard.classList.add("hidden")
+  });
+
+  const readornotbtn = document.getElementById("checkbox");
+  const itslabel = document.getElementById("number");
+
+  readornotbtn.addEventListener("click", function(event){
+    event.preventDefault();
+    if (readornotbtn.checked){
+      itslabel.innerHTML = "Read"
+    } else {itslabel.innerHTML = "Not read yet :("}
+  })
+
 });
 
-// card.addEventListener('click', () => handleCardClick(book.id));
-
-//     function handleCardClick(bookId) {
-//       // Find the index of the clicked book in the array
-//       const bookIndex = books.findIndex(book => book.id === bookId);
-
-//       if (bookIndex !== -1) {
-//         // Remove the book from the array
-//         const deletedBook = books.splice(bookIndex, 1)[0];
-//         console.log(`Deleted book: ${deletedBook.title}`);
-
-//         // Remove the corresponding card from the DOM
-//         const cardContainer = document.getElementById('card-container');
-//         const cardToRemove = cardContainer.children[bookIndex];
-//         cardContainer.removeChild(cardToRemove);
 
 // All of your book objects are going to be stored in a simple array, so add a function to the script (not the constructor) that can take user’s input and store the new book objects into an array.
 
