@@ -24,8 +24,8 @@ function generateId() {
   return Math.random().toString().slice(-3);
 }
 
-function Book(title, author, genre, pages, isRead) {
-  this.isRead = isRead ? "Book on reading" : "Book is available";
+function Book(title, author, genre, pages) {
+  // this.isRead = isRead ? "Book on reading" : "Book is available";
   this.title = title;
   this.author = author;
   this.genre = genre;
@@ -39,9 +39,9 @@ inputForm.addEventListener("submit", function (event) {
   const author = document.getElementById("author").value;
   const genre = document.getElementById("genre").value;
   const pages = document.getElementById("pages").value;
-  const isRead = document.getElementById("checkbox").checked;
+  // const isRead = document.getElementById("checkbox").checked;
 
-  const book = new Book(title, author, genre, pages, isRead);
+  const book = new Book(title, author, genre, pages);
 
   const addBookToLibrary = (book) => myLibrary.push(book);
 
@@ -50,17 +50,16 @@ inputForm.addEventListener("submit", function (event) {
   const [lybcontent] = myLibrary.slice(-1);
 
   const contentHandler = function (content) {
-    return `<div class="bookCard align-baseline gap-4 flex flex-col justify-center m-3 border-4 w-1/6 p-8  min-h-40 border-green-600 rounded-2xl text-center overflow-scroll">
+    return `<div class="bookCard align-baseline gap-4 flex flex-col justify-center m-3 border-4 p-8  min-h-40 border-green-600 rounded-2xl text-center overflow-scroll">
     <div class="border-b-2 border-green-400 pb-1">
     <h1 class="bookTitle font-extrabold text-2xl">${content.title}</h1>
     </div>
       <h2 class="author text-lg font-semibold">${content.author}</h2>
       <p class="pgNum text-base font-medium">${content.genre}</p>
       <p class="pgNum text-base font-medium">${content.pages}</p>
-      <p class="status font-medium">${content.isRead}</p>
       <div class="prose prose-stone mt-0 flex flex-col items-center justify-center pt-0 font-semibold tracking-wider">
-      <label for="number" id="number-label"></label>
-      <input name="checkbox" type="checkbox" id="checkbox" class="mt-2 scale-150 rounded-lg p-8 px-4" />
+      <label for="checkboxBook" id="checkboxBook-label"></label>
+      <input name="checkbox" type="checkbox" id="checkboxBook" class="mt-2 scale-150 rounded-lg p-8 px-4" />
     </div>
       <div>
       <button id=${content.id} class="removeBook flex flex-row items-center justify-center rounded-lg text-sm font-semibold hover:opacity-70 transition-all duration-500 w-full h-6 bg-amber-500 px-4 py-6">Remove book</button>
@@ -79,73 +78,33 @@ inputForm.addEventListener("submit", function (event) {
 
   removeBookbtn.addEventListener("click", function (event) {
     const clickedbuttonId = event.target.id;
-    const clickedItem = myLibrary.find(function(item) {
-      return item.id === clickedbuttonId});
-    myLibrary.splice(clickedItem,1);
+    const clickedItem = myLibrary.find(function (item) {
+      return item.id === clickedbuttonId;
+    });
+    myLibrary.splice(clickedItem, 1);
     console.log(myLibrary);
-      bookCard.classList.add("hidden")
+    bookCard.classList.add("hidden");
   });
 
-  const readornotbtn = document.getElementById("checkbox");
-  const itslabel = document.getElementById("number");
+  const checkboxForm = document.getElementById("checkboxForm");
+  const checkboxLabelForm = document.getElementById("checkbox-label");
+  const checkboxBook = document.getElementById("checkboxBook");
+  const checkboxLabelBook = document.getElementById("checkboxBook-label");
 
-  readornotbtn.addEventListener("click", function(event){
-    event.preventDefault();
-    if (readornotbtn.checked){
-      itslabel.innerHTML = "Read"
-    } else {itslabel.innerHTML = "Not read yet :("}
-  })
+  checkboxForm.addEventListener("change", function () {
+    if (this.checked) {
+      checkboxLabelForm.textContent = "Book is available.";
+    } else {
+      checkboxLabelForm.textContent = "Book is not available.";
+    }
+  });
 
+  checkboxBook.addEventListener("change", function () {
+    if (this.checked) {
+      checkboxLabelBook.textContent = "Read.";
+    } else {
+      checkboxLabelBook.textContent = "Not read yet.";
+    }
+  });
 });
 
-
-// All of your book objects are going to be stored in a simple array, so add a function to the script (not the constructor) that can take user’s input and store the new book objects into an array.
-
-// console.log(myLibrary);
-
-// const Hobit = new Book(`The Hobbit`, `J.R.R Tolkien`, 295, true);
-// console.log(Hobit);
-
-// console.log(Hobit.info());
-
-// console.log(Hobit instanceof Book);
-
-// console.log(Object.getPrototypeOf(Hobit));
-// console.log(Hobit.valueOf());
-
-// console.log(Hobit.__proto__);
-// console.log("bzv");
-
-// const numbers = {
-//   numberA: 5,
-//   numberB: 10,
-//   sum: function() {
-//     console.log(this === numbers); // => true
-
-//     const calculate = () => {
-//       console.log(this === numbers); // => true
-//       return this.numberA + this.numberB;
-//     }
-//     return calculate();
-//   }
-// };
-
-// console.log(numbers.sum()); // => 15
-
-// function Pet(type, legs) {
-//   this.type = type;
-//   this.legs = legs;
-
-//   this.logInfo = function() {
-//     console.log(this === myCat); // => false
-//     console.log(`The ${this.type} has ${this.legs} legs`);
-//   }
-// }
-
-// const myCat = new Pet('Cat', 4);
-// console.log(myCat.logInfo());
-// // logs "The undefined has undefined legs"
-// // or throws a TypeError in strict mode
-// const catlog = myCat.call(logInfo);
-
-// setTimeout(catlog, 1000);
