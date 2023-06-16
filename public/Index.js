@@ -4,15 +4,20 @@ const container = document.querySelector(".container");
 const inputForm = document.querySelector(".form");
 const newBookBtn = document.querySelector(".newBook");
 const closeFormBtn = document.getElementById("sign-up-close");
+const library = document.querySelector(".library");
 
 const openForm = function () {
   inputForm.classList.remove("hidden");
+  inputForm.classList.add("flex");
   newBookBtn.classList.add("hidden");
+  modal.classList.remove("hidden");
 };
 
 const closeForm = function () {
   inputForm.classList.add("hidden");
+  inputForm.classList.remove("flex");
   newBookBtn.classList.remove("hidden");
+  modal.classList.add("hidden");
 };
 
 newBookBtn.addEventListener("click", openForm);
@@ -50,19 +55,19 @@ inputForm.addEventListener("submit", function (event) {
   const [lybcontent] = myLibrary.slice(-1);
 
   const contentHandler = function (content) {
-    return `<div class="bookCard align-baseline gap-4 flex flex-col justify-center m-3 border-4 p-8  min-h-40 border-green-600 rounded-2xl text-center overflow-scroll">
-    <div class="border-b-2 border-green-400 pb-1">
+    return `<div class="bookCard align-baseline gap-6 flex flex-col justify-center m-2 border-4 px-6 border-amber-600 book-background rounded-2xl text-center overflow-scroll">
+    <div class="border-b-2 border-amber-600 pb-1">
     <h1 class="bookTitle font-extrabold text-2xl">${content.title}</h1>
     </div>
-      <h2 class="author text-lg font-semibold">${content.author}</h2>
-      <p class="pgNum text-base font-medium">${content.genre}</p>
-      <p class="pgNum text-base font-medium">${content.pages}</p>
+      <h2 class="author text-xl font-semibold">${content.author}</h2>
+      <p class="pgNum text-xl font-medium">${content.genre}</p>
+      <p class="pgNum text-xl font-medium">${content.pages}</p>
       <div class="prose prose-stone mt-0 flex flex-col items-center justify-center pt-0 font-semibold tracking-wider">
-      <label for="checkboxBook" id="checkboxBook-label"></label>
+      <label for="checkboxBook" id="checkboxBook-label">(check weather book is read or not)</label>
       <input name="checkbox" type="checkbox" id="checkboxBook" class="mt-2 scale-150 rounded-lg p-8 px-4" />
     </div>
       <div>
-      <button id=${content.id} class="removeBook flex flex-row items-center justify-center rounded-lg text-sm font-semibold hover:opacity-70 transition-all duration-500 w-full h-6 bg-amber-500 px-4 py-6">Remove book</button>
+      <button id=${content.id} class="removeBook remove-bookbtn">Remove book</button>
     </div>
     </div>`;
   };
@@ -71,7 +76,7 @@ inputForm.addEventListener("submit", function (event) {
 
   container.insertAdjacentHTML("afterbegin", htmlContent);
 
-  // inputForm.reset();
+  inputForm.reset();
 
   const removeBookbtn = document.querySelector(".removeBook");
   const bookCard = document.querySelector(".bookCard");
@@ -82,7 +87,6 @@ inputForm.addEventListener("submit", function (event) {
       return item.id === clickedbuttonId;
     });
     myLibrary.splice(clickedItem, 1);
-    console.log(myLibrary);
     bookCard.classList.add("hidden");
   });
 
@@ -107,4 +111,3 @@ inputForm.addEventListener("submit", function (event) {
     }
   });
 });
-
